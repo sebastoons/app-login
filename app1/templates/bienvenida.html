@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bienvenido</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h1>¡Bienvenido/a, {{ user.username }}!</h1>
+        <p class="inicio-sesion-message">¡Has iniciado sesión correctamente!</p>
+        
+        <!-- --- IMAGEN PERSONALIZADA AÑADIDA --- -->
+        <!-- Reemplazamos el SVG por una etiqueta de imagen estándar -->
+        <img src="{% static '/img/bienve.gif' %}" alt="Inicio de sesión exitoso" class="success-image">
+        
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Cerrar Sesión</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
