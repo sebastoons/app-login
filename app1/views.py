@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import RegistroForm
+from .forms import RegistroForm, RecuperarPasswordForm
 
 # Usamos un diccionario simple para contar los intentos fallidos.
 # Nota: Esto se reinicia cada vez que el servidor se reinicia.
@@ -72,5 +72,26 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'Has cerrado sesión exitosamente.')
     return redirect('login')
+
+
+# --- NUEVAS VISTAS PARA RECUPERACIÓN DE CONTRASEÑA ---
+def recuperar_password_view(request):
+    """Vista para mostrar el formulario de recuperación de contraseña"""
+    if request.method == 'POST':
+        form = RecuperarPasswordForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            # Aquí simularemos el envío del correo
+            messages.success(request, f'La clave de recuperación fue enviada a {email}')
+            return redirect('recuperar_confirmacion')
+    else:
+        form = RecuperarPasswordForm()
+    
+    return render(request, 'recuperar_password.html', {'form': form})
+
+
+def recuperar_confirmacion_view(request):
+    """Vista para mostrar la confirmación del envío ficticio del correo"""
+    return render(request, 'recuperar_confirmacion.html')
 
 

@@ -73,3 +73,25 @@ class RegistroForm(forms.ModelForm):
         return cleaned_data
 
 
+# --- NUEVO FORMULARIO PARA RECUPERACIÓN DE CONTRASEÑA ---
+class RecuperarPasswordForm(forms.Form):
+    email = forms.EmailField(
+        label="Correo Electrónico",
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Ingresa tu correo electrónico',
+            'class': 'form-control'
+        }),
+        error_messages={
+            'required': 'Este campo es obligatorio.',
+            'invalid': 'Por favor, introduce una dirección de correo válida.',
+        }
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError("No existe una cuenta asociada a este correo electrónico.")
+        return email
+
+

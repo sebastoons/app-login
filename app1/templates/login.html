@@ -32,12 +32,15 @@
             
             <button type="submit">Ingresar</button>
         </form>
+        
+        <!-- --- ENLACE PARA RECUPERAR CONTRASEÑA --- -->
+        <p class="texto-recuperar">
+            <a href="{% url 'recuperar_password' %}">¿Olvidaste tu contraseña?</a>
+        </p>
+        
         <p class="texto-registro">¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
     </div>
 
     <script src="{% static 'app1/js/control.js' %}"></script>
 </body>
 </html>
-
-
-

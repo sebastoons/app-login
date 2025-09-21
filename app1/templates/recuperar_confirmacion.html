@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Correo Enviado</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>¡Correo Enviado!</h2>
+        
+        <!-- Icono de éxito o imagen (opcional) -->
+        <div class="success-icon">
+            ✅
+        </div>
+        
+        <div class="mensaje-confirmacion">
+            <p><strong>El enlace de recuperación ha sido enviado a tu correo electrónico.</strong></p>
+            <p>Revisa tu bandeja de entrada y sigue las instrucciones para restablecer tu contraseña.</p>
+            <p class="nota-info">
+                <em>Nota: Si no encuentras el correo, revisa tu carpeta de spam o correo no deseado.</em>
+            </p>
+        </div>
+        
+        <!-- Botones de navegación -->
+        <div class="botones-navegacion">
+            <a href="{% url 'login' %}" class="btn-volver">Volver al Inicio de Sesión</a>
+            <a href="{% url 'recuperar_password' %}" class="btn-reenviar">Reenviar Correo</a>
+        </div>
+    </div>
+</body>
+</html>
